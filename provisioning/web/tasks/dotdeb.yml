@@ -1,0 +1,7 @@
+- name: add dotdeb repository key
+  become: true
+  apt_key: url=https://www.dotdeb.org/dotdeb.gpg
+
+- name: add dotdeb apt repository
+  become: true
+  apt_repository: repo='deb http://packages.dotdeb.org jessie all' state=present filename=dotdeb
