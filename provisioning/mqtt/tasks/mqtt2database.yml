@@ -1,0 +1,10 @@
+- name: copy mqtt2database
+  copy: src=mqtt2database dest=~ mode="u=rwx,g=rx,o=rx"
+
+- name: install mqtt2database service
+  become: true
+  copy: src=mqtt2database.service dest=/etc/systemd/system
+
+- name: start mqtt2database service
+  become: true
+  service: name=mqtt2database enabled=yes state=started

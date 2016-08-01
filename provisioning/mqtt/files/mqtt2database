@@ -1,0 +1,42 @@
+#!/bin/sh
+
+mosquitto_sub -v -t '#' | while read TOPIC JSON; do
+    database=$(echo $TOPIC | cut -d '/' -f 1)
+    table=$(echo $TOPIC | cut -d '/' -f 2-)
+
+    schema=''
+
+    case $TOPIC in
+        'domotic/radiator')
+            schema='room_id int, radiator_id integer, powered boolean'
+        ;;
+        'domotic/temperature')
+            schema='room_id int, temperature numeric'
+        ;;
+        'domotic/humidity')
+            schema='room_id int, humidity numeric'
+        ;;
+        'domotic/teleinfo')
+            schema='adco text, optarif text, isousc smallint, hchc bigint, hchp bigint, ptec text, iinst int, imax int, papp int, hhphc text, motdetat text'
+        ;;
+        'domotic/vmc')
+            schema='speed integer, forced boolean'
+        ;;
+        'domotic/weather')
+            schema='temperature_indoor numeric, temperature_outdoor numeric, dewpoint numeric, humidity_indoor integer, humidity_outdoor integer, wind_all numeric, winddir numeric, directions text, windchill numeric, rain_1h numeric, rain_24h numeric, rain_total numeric, rel_pressure numeric, tendency text, forecast text'
+        ;;
+        'network/connected_device')
+            schema='station_mac macaddr, ip inet, mac macaddr, virtual_mac macaddr'
+        ;;
+    esac
+
+    if [[ $schema != '' ]]
+    then
+        sudo -u sanpi psql -q -c "INSERT INTO $table SELECT now() AS created, * FROM json_to_record('$JSON') as x($schema);" $database
+
+        if [ $? -ne 0 ]
+        then
+            sudo -u sanpi psql -q -c "INSERT INTO log (topic, payload, source) VALUES('$TOPIC', '$JSON', '$0');" mqtt
+        fi
+    fi
+done

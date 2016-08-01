@@ -1,0 +1,10 @@
+[Unit]
+Description=mqtt2database
+After=network.target
+
+[Service]
+ExecStart=/home/vagrant/mqtt2database
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
