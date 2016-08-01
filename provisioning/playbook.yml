@@ -1,6 +1,10 @@
-- hosts: default
+- hosts: weather
   roles:
     - common
     - mqtt
     - database
     - weather
+
+- hosts: vmc
+  roles:
+    - common
