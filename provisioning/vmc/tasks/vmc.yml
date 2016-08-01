@@ -1,0 +1,17 @@
+- name: install git
+  become: true
+  apt: name=git state=present
+
+- name: clone sources
+  git: repo=https://github.com/sanpii/vmc.git dest=~/vmc
+
+- name: copy configuration
+  copy: src=vmc dest=~/.config/
+
+- name: install service
+  become: true
+  copy: src=vmc.service dest=/etc/systemd/system
+
+- name: start service
+  become: true
+  service: name=vmc enabled=yes state=started

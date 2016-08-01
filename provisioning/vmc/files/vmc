@@ -1,0 +1,9 @@
+readonly MAX_HUMIDITY=80
+readonly MIN_TEMPERATURE=3
+readonly MAX_TEMPERATURE=30
+readonly SEASON='summer'
+readonly MQTT_HOST='192.0.2.42'
+readonly MQTT_USER=''
+readonly MQTT_PASSWORD=''
+readonly GPIO_INT1=23
+readonly GPIO_INT2=24

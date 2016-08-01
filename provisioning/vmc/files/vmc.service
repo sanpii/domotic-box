@@ -1,0 +1,10 @@
+[Unit]
+Description=VMC
+After=network.target
+
+[Service]
+ExecStart=/home/vagrant/vmc/src/vmc
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

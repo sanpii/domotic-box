@@ -1,0 +1,3 @@
+- name: install mosquitto utils
+  become: true
+  apt: name=mosquitto-clients state=present
