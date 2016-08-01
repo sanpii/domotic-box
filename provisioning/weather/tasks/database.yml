@@ -1,0 +1,27 @@
+- name: install git
+  become: true
+  apt: name=git state=present
+
+- name: clone weather repo
+  git: repo=https://github.com/sanpii/weather.git dest=~/weather
+
+- name: create weather table
+  command: psql --set ON_ERROR_STOP=1 -f sql/structure.sql domotic
+  args:
+    chdir: ~/weather
+
+- name: clone vmc
+  git: repo=https://github.com/sanpii/vmc.git dest=~/vmc
+
+- name: create vmc table
+  command: psql --set ON_ERROR_STOP=1 -f src/sql/structure.sql domotic
+  args:
+    chdir: ~/vmc
+
+- name: clone sensor
+  git: repo=https://github.com/sanpii/sensor.git dest=~/sensor
+
+- name: create sensor table
+  command: psql --set ON_ERROR_STOP=1 -f sql/structure.sql domotic
+  args:
+    chdir: ~/sensor
