@@ -4,6 +4,7 @@
     - mqtt
     - database
     - weather
+    - grafana
 
 - hosts: vmc
   roles:

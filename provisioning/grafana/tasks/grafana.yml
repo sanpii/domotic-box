@@ -1,0 +1,19 @@
+- name: install apt-transport-https
+  become: true
+  apt: name=apt-transport-https state=present
+
+- name: add grafana repository key
+  become: true
+  apt_key: url=https://packagecloud.io/gpg.key
+
+- name: add grafana apt repository
+  become: true
+  apt_repository: repo='deb https://packagecloud.io/grafana/stable/debian/ jessie main' state=present filename=grafana
+
+- name: install grafana
+  become: true
+  apt: name=grafana state=present
+
+- name: start grafana
+  become: true
+  service: name=grafana-server enabled=yes state=started
