@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name dashboard.example.org;
+    root /home/vagrant/dashboard/web;
+
+    location / {
+        try_files $uri $uri/ @rewrite;
+    }
+}

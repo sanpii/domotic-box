@@ -5,6 +5,7 @@
     - database
     - weather
     - grafana
+    - dashboard
 
 - hosts: vmc
   roles:
