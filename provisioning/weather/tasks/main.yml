@@ -1,2 +1,3 @@
-- include: open2300.yml
+- include: rust.yml
+- include: ws2300.yml
 - include: database.yml

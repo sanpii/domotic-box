@@ -23,7 +23,7 @@ mosquitto_sub -v -t '#' | while read TOPIC JSON; do
             schema='speed integer, forced boolean'
         ;;
         'domotic/weather')
-            schema='temperature_indoor numeric, temperature_outdoor numeric, dewpoint numeric, humidity_indoor integer, humidity_outdoor integer, wind_all numeric, winddir numeric, directions text, windchill numeric, rain_1h numeric, rain_24h numeric, rain_total numeric, rel_pressure numeric, tendency text, forecast text'
+            schema='temperature_indoor numeric, temperature_outdoor numeric, dewpoint numeric, humidity_indoor integer, humidity_outdoor integer, wind_speed numeric, wind_dir numeric, wind_direction text, wind_chill numeric, rain_1h numeric, rain_24h numeric, rain_total numeric, pressure numeric, tendency text, forecast text'
         ;;
         'network/connected_device')
             schema='station_mac macaddr, ip inet, mac macaddr, virtual_mac macaddr'

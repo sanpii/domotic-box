@@ -1,0 +1,28 @@
+- name: add unstable apt repository
+  become: true
+  apt_repository: repo='deb http://httpredir.debian.org/debian unstable main' state=present filename=unstable
+
+- name: copy unstable apt preference
+  become: true
+  copy: src=unstable dest=/etc/apt/preferences.d/
+
+- name: upgrade libtinfo5
+  become: true
+  apt: name=libtinfo5 default_release=unstable state=present
+
+- name: upgrade libstdc++6
+  become: true
+  apt: name=libstdc++6 default_release=unstable state=present
+
+- name: upgrade libllvm3.8
+  become: true
+  apt: name=libllvm3.8 default_release=unstable state=present
+
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=808576
+- name: upgrade binutils
+  become: true
+  apt: name=binutils default_release=unstable state=present
+
+- name: install cargo
+  become: true
+  apt: name=cargo state=present
