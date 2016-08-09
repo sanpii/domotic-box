@@ -11,3 +11,8 @@
   roles:
     - common
     - vmc
+
+- hosts: teleinfo
+  roles:
+    - common
+    - teleinfo
