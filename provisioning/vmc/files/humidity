@@ -1,0 +1,60 @@
+#!/bin/bash
+
+set -e
+
+if [[ ! -e ~/.config/vmc ]]
+then
+    >&2 echo 'No configuration found'
+    exit 1
+else
+    . ~/.config/vmc
+fi
+
+function main()
+{
+    listem_mqtt_weather
+}
+
+function listem_mqtt_weather()
+{
+    local humidity=0
+
+    while read TOPIC STATE
+    do
+        humidity=$(current_humidity)
+
+        if [[ $(comp "$humidity" '>=' '0.05') ]]
+        then
+            mosquitto_pub --host "$MQTT_HOST" --username "$MQTT_USER" --pw "$MQTT_PASSWORD" \
+                --qos 2 --topic domotic/vmc/state --message pulse2
+        fi
+    done < <(mosquitto_sub -h "$MQTT_HOST" -u "$MQTT_USER" -P "$MQTT_PASSWORD" -v -t domotic/weather)
+}
+
+function current_humidity()
+{
+    set +e
+    local content=$(wget -q -O - "https://$PG_HOST/query?db=domotic&u=$PG_USER&p=$PG_PASSWORD&q=SELECT+ROUND(regr_slope(humidity,EXTRACT(epoch+FROM+created))::numeric,4)+FROM+humidity+WHERE+room_id=1+AND+created+%3E+now()-%2710+min%27::interval;")
+    set -e
+
+    if [[ -n "$content" ]]
+    then
+        echo $content | shyaml get-value results.0.series.0.values.0.0
+    else
+        echo 0
+    fi
+}
+
+function comp()
+{
+    local a=$1
+    local op=$2
+    local b=$3
+
+    if [[ $(echo "$a $op $b" | bc) -eq 1 ]]
+    then
+        echo true
+    fi
+}
+
+main

@@ -1,0 +1,10 @@
+[Unit]
+Description=Humidity
+After=network.target
+
+[Service]
+ExecStart=/home/vagrant/humidity
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
