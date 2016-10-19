@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-mosquitto_sub -v -t '#' | while read TOPIC JSON
+while read TOPIC JSON
 do
     database=$(echo $TOPIC | cut -d '/' -f 1)
     table=$(echo $TOPIC | cut -d '/' -f 2-)
@@ -36,6 +36,6 @@ do
 
     if [[ $schema != '' ]]
     then
-        sudo -u sanpi psql -q -c "INSERT INTO $table SELECT now() AS created, * FROM json_to_record('$JSON') as x($schema);" $database
+        psql -q -c "INSERT INTO $table SELECT now() AS created, * FROM json_to_record('$JSON') as x($schema);" "$database"
     fi
-done
+done < <(mosquitto_sub -v -t '#')
