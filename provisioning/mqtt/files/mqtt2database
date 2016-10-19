@@ -37,10 +37,5 @@ do
     if [[ $schema != '' ]]
     then
         sudo -u sanpi psql -q -c "INSERT INTO $table SELECT now() AS created, * FROM json_to_record('$JSON') as x($schema);" $database
-
-        if [ $? -ne 0 ]
-        then
-            sudo -u sanpi psql -q -c "INSERT INTO log (topic, payload, source) VALUES('$TOPIC', '$JSON', '$0');" mqtt
-        fi
     fi
 done
