@@ -1,6 +1,7 @@
 #!/bin/sh
 
-mosquitto_sub -v -t '#' | while read TOPIC JSON; do
+mosquitto_sub -v -t '#' | while read TOPIC JSON
+do
     database=$(echo $TOPIC | cut -d '/' -f 1)
     table=$(echo $TOPIC | cut -d '/' -f 2-)
 
@@ -27,6 +28,9 @@ mosquitto_sub -v -t '#' | while read TOPIC JSON; do
         ;;
         'network/connected_device')
             schema='station_mac macaddr, ip inet, mac macaddr, virtual_mac macaddr'
+        ;;
+        'system/log')
+            schema='level text, priority numeric, facility text, date timestamp, host text, message text, pid text, program text'
         ;;
     esac
 
