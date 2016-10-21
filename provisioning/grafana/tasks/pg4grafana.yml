@@ -15,7 +15,4 @@
 - name: copy vhost
   become: true
   copy: src=pg4grafana.vhost dest=/etc/nginx/sites-enabled/
-
-- name: reload nginx
-  become: true
-  service: name=nginx state=reloaded
+  notify: nginx reload

@@ -1,0 +1,3 @@
+- name: php reload
+  become: true
+  service: name=php7.0-fpm state=reloaded

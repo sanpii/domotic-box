@@ -5,19 +5,19 @@
 - name: install pgsql extension
   become: true
   apt: name=php-pgsql state=present
+  notify: php reload
 
 - name: install xml extension
   become: true
   apt: name=php-xml state=present
+  notify: php reload
 
 - name: copy php pool
   become: true
   copy: src=pool.conf dest=/etc/php/7.0/fpm/pool.d/vagrant.conf
+  notify: php reload
 
 - name: copy php configuration
   become: true
   copy: src=php.ini dest=/etc/php/7.0/fpm/conf.d/99-custom.ini
-
-- name: reload php
-  become: true
-  service: name=php7.0-fpm state=reloaded
+  notify: php reload

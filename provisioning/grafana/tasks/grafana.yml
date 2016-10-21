@@ -13,7 +13,3 @@
 - name: install grafana
   become: true
   apt: name=grafana state=present
-
-- name: start grafana
-  become: true
-  service: name=grafana-server enabled=yes state=started
