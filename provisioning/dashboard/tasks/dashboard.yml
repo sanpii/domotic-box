@@ -16,8 +16,7 @@
   become: true
   npm: name=bower global=yes
 
-- name: install dependencies
-  command: bower install
+- command: make
   args:
     chdir: ~/dashboard
 

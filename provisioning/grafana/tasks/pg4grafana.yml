@@ -10,7 +10,9 @@
   args:
     creates: /usr/local/bin/composer
 
-- composer: command=install working_dir=pg4grafana
+- command: make
+  args:
+    chdir: ~/pg4grafana
 
 - name: copy vhost
   become: true
