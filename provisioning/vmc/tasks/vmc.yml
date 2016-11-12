@@ -15,15 +15,3 @@
 - name: start vmc service
   become: true
   service: name=vmc enabled=yes state=started
-
-- name: install humidity script
-  become: true
-  copy: src=humidity dest=~/humidity
-
-- name: install humidity service
-  become: true
-  copy: src=humidity.service dest=/etc/systemd/system
-
-- name: start humidity service
-  become: true
-  service: name=humidity enabled=yes state=started
