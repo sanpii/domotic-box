@@ -1,12 +1,17 @@
 - name: clone sources
-  git: repo=https://github.com/sanpii/pg4grafana.git dest=~/pg4grafana
+  git:
+    repo: https://github.com/sanpii/pg4grafana.git
+    dest: ~/pg4grafana
 
 - name: copy configuration
-  copy: src=parameters.yml dest=~/pg4grafana/app/config
+  copy:
+    src: parameters.yml
+    dest: ~/pg4grafana/app/config
 
 - name: install composer
   become: true
-  shell: wget https://getcomposer.org/installer -O - | php -- --install-dir=/usr/local/bin --filename=composer
+  shell:
+    wget https://getcomposer.org/installer -O - | php -- --install-dir=/usr/local/bin --filename=composer
   args:
     creates: /usr/local/bin/composer
 
@@ -16,5 +21,7 @@
 
 - name: copy vhost
   become: true
-  copy: src=pg4grafana.vhost dest=/etc/nginx/sites-enabled/
+  copy:
+    src: pg4grafana.vhost
+    dest: /etc/nginx/sites-enabled/
   notify: nginx reload

@@ -1,17 +1,28 @@
 - name: install git
   become: true
-  apt: name=git state=present
+  apt:
+    name: git
+    state: present
 
 - name: clone sources
-  git: repo=https://github.com/sanpii/vmc.git dest=~/vmc
+  git:
+    repo: https://github.com/sanpii/vmc.git
+    dest: ~/vmc
 
 - name: copy configuration
-  copy: src=vmc dest=~/.config/
+  copy:
+    src: vmc
+    dest: ~/.config/
 
 - name: install vmc service
   become: true
-  copy: src=vmc.service dest=/etc/systemd/system
+  copy:
+    src: vmc.service
+    dest: /etc/systemd/system
 
 - name: start vmc service
   become: true
-  service: name=vmc enabled=yes state=started
+  service:
+    name: vmc
+    enabled: yes
+    state: started

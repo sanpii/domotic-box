@@ -1,20 +1,31 @@
 - name: clone sources
-  git: repo=https://github.com/sanpii/domotic-dashboard.git dest=~/dashboard
+  git:
+    repo: https://github.com/sanpii/domotic-dashboard.git
+    dest: ~/dashboard
 
 - name: copy configuration
-  copy: src=config.js dest=~/dashboard/web/js/
+  copy:
+    src: config.js
+    dest: ~/dashboard/web/js/
 
 - name: install npm
   become: true
-  apt: name=npm state=present
+  apt:
+    name: npm
+    state: present
 
 - name: create node symlink
   become: true
-  file: path=/usr/local/bin/node src=/usr/bin/nodejs state=link
+  file:
+    path: /usr/local/bin/node
+    src: /usr/bin/nodejs
+    state: link
 
 - name: install bower
   become: true
-  npm: name=bower global=yes
+  npm:
+    name: bower
+    global: yes
 
 - command: make
   args:
@@ -22,5 +33,7 @@
 
 - name: copy vhost
   become: true
-  copy: src=dashboard.vhost dest=/etc/nginx/sites-enabled/
+  copy:
+    src: dashboard.vhost
+    dest: /etc/nginx/sites-enabled/
   notify: nginx reload

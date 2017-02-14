@@ -1,13 +1,19 @@
 - name: modify boot cmdline
   become: true
-  replace: dest=/boot/cmdline.txt regexp='console=ttyAMA0,115200 kgdboc=ttyAMA0,115200' replace=''
+  replace:
+    dest: /boot/cmdline.txt
+    regexp: 'console: ttyAMA0,115200 kgdboc: ttyAMA0,115200'
+    replace: ''
   with_first_found:
     - files: [/dev/ttyAMA0]
       skip: true
 
 - name: modify inittab
   become: true
-  lineinfile: dest=/etc/inittab line='T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100' state=absent
+  lineinfile:
+    dest: /etc/inittab
+    line: 'T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100'
+    state: absent
   with_first_found:
     - files: [/dev/ttyAMA0]
       skip: true
@@ -21,10 +27,14 @@
 
 - name: install git
   become: true
-  apt: name=git state=present
+  apt:
+    name: git
+    state: present
 
 - name: clone teleinfo
-  git: repo=https://github.com/sanpii/domotic-teleinfo.git dest=~/teleinfo
+  git:
+    repo: https://github.com/sanpii/domotic-teleinfo.git
+    dest: ~/teleinfo
 
 - name: compile teleinfo
   command: cargo build --release
@@ -34,4 +44,6 @@
 
 - name: install cron task
   become: true
-  copy: src=cron dest=/etc/cron.d/teleinfo
+  copy:
+    src: cron
+    dest: /etc/cron.d/teleinfo

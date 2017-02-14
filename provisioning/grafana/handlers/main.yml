@@ -1,3 +1,5 @@
 - name: nginx reload
   become: true
-  service: name=nginx state=reloaded
+  service:
+    name: nginx
+    state: reloaded

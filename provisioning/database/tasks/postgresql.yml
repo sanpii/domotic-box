@@ -1,17 +1,26 @@
 - name: install postgresql
   become: true
-  apt: name=postgresql state=present
+  apt:
+    name: postgresql
+    state: present
 
 - name: install psycopg2
   become: true
-  apt: name=python-psycopg2 state=present
+  apt:
+    name: python-psycopg2
+    state: present
 
 - name: create vagrant user
   become: true
   become_user: postgres
-  postgresql_user: name=vagrant password=vagrant role_attr_flags=SUPERUSER
+  postgresql_user:
+    name: vagrant
+    password: vagrant
+    role_attr_flags: SUPERUSER
 
 - name: create domotic database
   become: true
   become_user: postgres
-  postgresql_db: name=domotic owner=vagrant
+  postgresql_db:
+    name: domotic
+    owner: vagrant

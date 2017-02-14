@@ -1,9 +1,13 @@
 - name: install git
   become: true
-  apt: name=git state=present
+  apt:
+    name: git
+    state: present
 
 - name: clone ws2300
-  git: repo=https://github.com/sanpii/ws2300.git dest=~/ws2300
+  git:
+    repo: https://github.com/sanpii/ws2300.git
+    dest: ~/ws2300
 
 - name: compile ws2300
   command: cargo build --release
@@ -13,4 +17,6 @@
 
 - name: install cron task
   become: true
-  copy: src=cron dest=/etc/cron.d/ws2300
+  copy:
+    src: cron
+    dest: /etc/cron.d/ws2300
