@@ -42,6 +42,6 @@
 
 - name: install cargo
   become: true
-  apt:
+  package:
     name: cargo
     state: present

@@ -1,19 +1,19 @@
 - name: install php
   become: true
-  apt:
+  package:
     name: php-fpm
     state: present
 
 - name: install pgsql extension
   become: true
-  apt:
+  package:
     name: php-pgsql
     state: present
   notify: php reload
 
 - name: install xml extension
   become: true
-  apt:
+  package:
     name: php-xml
     state: present
   notify: php reload

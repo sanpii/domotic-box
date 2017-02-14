@@ -1,12 +1,12 @@
 - name: install mosquitto utils
   become: true
-  apt:
+  package:
     name: mosquitto-clients
     state: present
 
 - name: install mosquitto server
   become: true
-  apt:
+  package:
     name: mosquitto
     state: present
 

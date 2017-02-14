@@ -1,6 +1,6 @@
 - name: install git
   become: true
-  apt:
+  package:
     name: git
     state: present
 

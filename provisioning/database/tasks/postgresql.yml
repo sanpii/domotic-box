@@ -1,12 +1,12 @@
 - name: install postgresql
   become: true
-  apt:
+  package:
     name: postgresql
     state: present
 
 - name: install psycopg2
   become: true
-  apt:
+  package:
     name: python-psycopg2
     state: present
 

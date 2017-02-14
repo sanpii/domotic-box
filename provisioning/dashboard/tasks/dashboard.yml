@@ -10,7 +10,7 @@
 
 - name: install npm
   become: true
-  apt:
+  package:
     name: npm
     state: present
 

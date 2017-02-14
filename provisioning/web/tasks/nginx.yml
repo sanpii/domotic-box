@@ -1,6 +1,6 @@
 - name: install nginx
   become: true
-  apt:
+  package:
     name: nginx
     state: present
 
