@@ -1,11 +1,11 @@
 - name: add dotdeb repository key
   become: true
   apt_key:
-    url: https://www.dotdeb.org/dotdeb.gpg
+    url: https://packages.sury.org/php/apt.gpg
 
 - name: add dotdeb apt repository
   become: true
   apt_repository:
-    repo: 'deb http://packages.dotdeb.org jessie all'
+    repo: 'deb https://packages.sury.org/php/ jessie main'
     state: present
     filename: dotdeb
