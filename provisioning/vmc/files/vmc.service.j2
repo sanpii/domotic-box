@@ -3,7 +3,8 @@ Description=VMC
 After=network.target
 
 [Service]
-ExecStart=/home/vagrant/vmc/src/vmc
+User={{ ansible_user_id }}
+ExecStart={{ ansible_user_dir }}/vmc/src/vmc
 Restart=on-failure
 
 [Install]

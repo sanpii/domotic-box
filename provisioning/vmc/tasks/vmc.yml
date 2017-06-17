@@ -23,9 +23,9 @@
 
 - name: install vmc service
   become: true
-  copy:
-    src: vmc.service
-    dest: /etc/systemd/system
+  template:
+    src: files/vmc.service.j2
+    dest: /etc/systemd/system/vmc.service
 
 - name: start vmc service
   become: true
