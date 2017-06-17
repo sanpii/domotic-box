@@ -14,6 +14,13 @@
     src: vmc
     dest: ~/.config/
 
+- name: add current user to gpio group
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    group: gpio
+    append: yes
+
 - name: install vmc service
   become: true
   copy:
