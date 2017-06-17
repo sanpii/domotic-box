@@ -1,8 +1,12 @@
-- name: install git
+- name: install depencies
   become: true
   package:
-    name: git
+    name: "{{ item }}"
     state: present
+  with_items:
+    - git
+    - jq
+    - bc
 
 - name: clone sources
   git:
