@@ -10,7 +10,7 @@
     dest: ~/weather
 
 - name: create weather table
-  command: psql --set ON_ERROR_STOP: 1 -f sql/structure.sql domotic
+  command: "psql --set 'ON_ERROR_STOP: 1' -f sql/structure.sql domotic"
   args:
     chdir: ~/weather
 
@@ -20,7 +20,7 @@
     dest: ~/vmc
 
 - name: create vmc table
-  command: psql --set ON_ERROR_STOP: 1 -f src/sql/structure.sql domotic
+  command: "psql --set 'ON_ERROR_STOP: 1' -f src/sql/structure.sql domotic"
   args:
     chdir: ~/vmc
 
@@ -30,6 +30,6 @@
     dest: ~/sensor
 
 - name: create sensor table
-  command: psql --set ON_ERROR_STOP: 1 -f sql/structure.sql domotic
+  command: "psql --set 'ON_ERROR_STOP: 1' -f sql/structure.sql domotic"
   args:
     chdir: ~/sensor

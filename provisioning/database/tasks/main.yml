@@ -1,1 +1,2 @@
 - include: postgresql.yml
+- include: vmc.yml
