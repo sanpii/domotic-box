@@ -10,7 +10,7 @@
     dest: ~/ws2300
 
 - name: compile ws2300
-  command: cargo build --release
+  command: ~/.cargo/bin/cargo build --release
   args:
     chdir: ~/ws2300
     creates: ~/ws2300/target/release/ws2300

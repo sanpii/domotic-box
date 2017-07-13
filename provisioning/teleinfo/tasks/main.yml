@@ -37,7 +37,7 @@
     dest: ~/teleinfo
 
 - name: compile teleinfo
-  command: cargo build --release
+  command: ~/.cargo/bin/cargo build --release
   args:
     chdir: ~/teleinfo
     creates: ~/teleinfo/target/release/teleinfo
