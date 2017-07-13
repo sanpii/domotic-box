@@ -1,1 +1,1 @@
-#* * * * * /usr/bin/mosquitto_pub -t domotic/weather -m "$(/home/vagrant/ws2300/target/release/ws2300 /dev/ttyUSB0)"
+#* * * * * root /usr/bin/mosquitto_pub -t domotic/weather -m "$(/home/vagrant/ws2300/target/release/ws2300 /dev/ttyUSB0)"
