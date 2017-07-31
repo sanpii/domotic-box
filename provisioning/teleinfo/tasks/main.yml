@@ -8,15 +8,12 @@
     - files: [/dev/ttyAMA0]
       skip: true
 
-- name: modify inittab
+- name: enable ttyAMA0
   become: true
-  lineinfile:
-    dest: /etc/inittab
-    line: 'T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100'
-    state: absent
-  with_first_found:
-    - files: [/dev/ttyAMA0]
-      skip: true
+  service:
+    name: getty@ttyAMA0.service
+    enabled: yes
+    state: started
 
 - name: configure serial port
   become: true
