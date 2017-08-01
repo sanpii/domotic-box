@@ -1,8 +1,8 @@
 - name: copy mqtt2database
   copy:
     src: mqtt2database
-    dest: ~
-    mode: "u: rwx,g: rx,o: rx"
+    dest: '~'
+    mode: "u=rwx,g=rx,o=rx"
 
 - name: install mqtt2database service
   become: true

@@ -2,7 +2,7 @@
   become: true
   copy:
     src: humidity
-    dest: ~/humidity
+    dest: '~'
 
 - name: install humidity service
   become: true
