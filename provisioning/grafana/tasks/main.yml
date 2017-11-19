@@ -1,2 +1,1 @@
-- include: pg4grafana.yml
 - include: grafana.yml
