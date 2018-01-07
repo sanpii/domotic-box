@@ -12,7 +12,7 @@
 - name: add grafana apt repository
   become: true
   apt_repository:
-    repo: 'deb https://packagecloud.io/grafana/stable/debian/ jessie main'
+    repo: 'deb https://packagecloud.io/grafana/stable/debian/ {{ debian_version }} main'
     state: present
     filename: grafana
 

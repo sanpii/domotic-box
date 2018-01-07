@@ -6,6 +6,6 @@
 - name: add dotdeb apt repository
   become: true
   apt_repository:
-    repo: 'deb https://packages.sury.org/php/ jessie main'
+    repo: 'deb https://packages.sury.org/php/ {{ debian_version }} main'
     state: present
     filename: dotdeb
